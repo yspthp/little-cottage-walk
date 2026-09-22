@@ -14,6 +14,8 @@
   <main>
     <section id="painting" aria-label="小屋草地上的女孩">
       <img class="backdrop" src="https://huggingface.co/yspthp/lavender/resolve/main/PHOTO-2026-09-22-22-35-56_processed.jpg?download=true" alt="粉彩星空下的小屋與綠色草地">
+      <div class="parallax-sky" aria-hidden="true"></div>
+      <div class="parallax-haze" aria-hidden="true"></div>
       <div id="viewport"></div>
       <div class="paper-wash" aria-hidden="true"></div>
       <header><span class="eyebrow">A LITTLE WALK IN A PAINTING</span><h1>微光小屋<span>畫裡散步</span></h1><p>輕輕傾斜，走進一幅溫柔的風景。</p></header>
@@ -40,6 +42,7 @@
           : '無法載入 Three.js，請檢查網絡連線、內容安全政策（CSP）或 CDN 是否被阻擋，然後重新整理。';
       loading.innerHTML = `<strong>${message}</strong><small>${error?.message ?? ''}</small>`;
     });
+    import('./parallax.js');
     const loading = document.querySelector('#loading');
     const launch = document.querySelector('#auto-motion');
     new MutationObserver(() => { if (loading.hidden) launch.disabled = false; }).observe(loading, { attributes: true, attributeFilter: ['hidden'] });
