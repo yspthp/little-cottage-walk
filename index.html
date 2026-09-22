@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ebe4d8">
+  <title>微光小屋 · 畫裡散步</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <main>
+    <section id="painting" aria-label="小屋草地上的女孩">
+      <img class="backdrop" src="./Painting/_processed/PHOTO-2026-09-22-22-35-56_processed.jpg" alt="粉彩星空下的小屋與綠色草地">
+      <div id="viewport"></div>
+      <div class="paper-wash" aria-hidden="true"></div>
+      <header><span class="eyebrow">A LITTLE WALK IN A PAINTING</span><h1>微光小屋<span>畫裡散步</span></h1><p>輕輕傾斜，走進一幅溫柔的風景。</p></header>
+      <div class="tag">✧ &nbsp; 慢慢走，星光會等你</div>
+      <div id="loading" role="status"><span class="spinner"></span><strong>女孩正走進畫裡…</strong><small id="progress">正在載入 3D 模型（約 118 MB）</small></div>
+      <div class="controls">
+        <div class="actions"><button id="motion" disabled>開啟傾斜漫步 <span>↗</span></button><button id="calibrate" class="secondary" disabled>以現在姿勢校準</button><button id="reset" class="secondary" disabled>回到起點</button></div>
+        <p id="status" role="status" aria-live="polite">載入後，可用方向鍵或按住下方方向按鈕散步。</p>
+        <div class="pad" aria-label="手動移動控制"><button data-x="-1" data-y="0" aria-label="向左">←</button><button data-x="0" data-y="-1" aria-label="向遠處">↑</button><button data-x="0" data-y="1" aria-label="向前方">↓</button><button data-x="1" data-y="0" aria-label="向右">→</button></div>
+        <small class="note">傾斜手機控制方向 · 保持平穩即可停下</small>
+      </div>
+    </section>
+  </main>
+  <script type="module">
+    import('./app.js').catch(error => {
+      console.error(error);
+      const loading = document.querySelector('#loading');
+      const message = location.protocol === 'file:'
+        ? '請透過本機 HTTP 伺服器開啟，不要直接雙擊 HTML。GLB 模型會被瀏覽器的檔案安全限制擋下。'
+        : !document.createElement('canvas').getContext('webgl2') && !document.createElement('canvas').getContext('webgl')
+          ? '這個瀏覽器沒有可用的 WebGL，請啟用硬體加速或改用 Chrome / Safari / Edge。'
+          : '無法載入 Three.js，請檢查網絡連線、內容安全政策（CSP）或 CDN 是否被阻擋，然後重新整理。';
+      loading.innerHTML = `<strong>${message}</strong><small>${error?.message ?? ''}</small>`;
+    });
+  </script>
+</body>
+</html>
