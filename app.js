@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const $ = selector => document.querySelector(selector);
 const status = text => { $('#status').textContent = text; };
 const clamp = THREE.MathUtils.clamp;
+const MODEL_URL = 'https://huggingface.co/yspthp/lavender/resolve/main/Meshy_AI_Lavender_Parasol_Maid_0902202009_texture.glb?download=true';
 // Shared painting coordinates: x right, y down, both in [0,1].
 const GROUND = { left: .12, right: .88, far: .825, near: .962 };
 const state = { x: .37, y: .90, vx: 0, vy: 0, phase: 0, heading: 0 };
@@ -50,7 +51,7 @@ new ResizeObserver(() => {
   camera.updateProjectionMatrix();
 }).observe($('#viewport'));
 
-new GLTFLoader().load('./Meshy_AI_Lavender_Parasol_Maid_0902202009_texture.glb', gltf => {
+new GLTFLoader().load(MODEL_URL, gltf => {
   actor = gltf.scene;
   const bounds = new THREE.Box3().setFromObject(actor);
   const size = bounds.getSize(new THREE.Vector3());
@@ -72,7 +73,7 @@ new GLTFLoader().load('./Meshy_AI_Lavender_Parasol_Maid_0902202009_texture.glb',
     : `已載入 ${(event.loaded / 1e6).toFixed(1)} MB / 約 118 MB`;
 }, error => {
   console.error(error);
-  $('#loading').textContent = '女孩未能載入。請確認模型檔案存在，並透過網頁伺服器開啟後重新整理。';
+  $('#loading').textContent = '女孩未能載入。請確認 Hugging Face 檔案設為 Public，並檢查模型檔名是否完全一致。';
 });
 
 function orientationVector(event) {
