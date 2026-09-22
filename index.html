@@ -18,6 +18,8 @@
       <div class="paper-wash" aria-hidden="true"></div>
       <header><span class="eyebrow">A LITTLE WALK IN A PAINTING</span><h1>微光小屋<span>畫裡散步</span></h1><p>輕輕傾斜，走進一幅溫柔的風景。</p></header>
       <div class="tag">✧ &nbsp; 慢慢走，星光會等你</div>
+      <button id="auto-motion" class="auto-motion" disabled>開啟傾斜漫步 <span>↗</span></button>
+      <button id="menu-toggle" class="menu-toggle" aria-label="顯示控制選單">☰</button>
       <div id="loading" role="status"><span class="spinner"></span><strong>女孩正走進畫裡…</strong><small id="progress">正在載入 3D 模型（約 118 MB）</small></div>
       <div class="controls">
         <div class="actions"><button id="motion" disabled>開啟傾斜漫步 <span>↗</span></button><button id="calibrate" class="secondary" disabled>以現在姿勢校準</button><button id="reset" class="secondary" disabled>回到起點</button></div>
@@ -37,6 +39,10 @@
           ? '這個瀏覽器沒有可用的 WebGL，請啟用硬體加速或改用 Chrome / Safari / Edge。'
           : '無法載入 Three.js，請檢查網絡連線、內容安全政策（CSP）或 CDN 是否被阻擋，然後重新整理。';
       loading.innerHTML = `<strong>${message}</strong><small>${error?.message ?? ''}</small>`;
+    });
+    document.querySelector('#auto-motion').addEventListener('click', () => document.querySelector('#motion').click());
+    document.querySelector('#menu-toggle').addEventListener('click', () => {
+      document.querySelector('.controls').classList.toggle('visible');
     });
   </script>
 </body>
