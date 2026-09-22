@@ -40,6 +40,9 @@
           : '無法載入 Three.js，請檢查網絡連線、內容安全政策（CSP）或 CDN 是否被阻擋，然後重新整理。';
       loading.innerHTML = `<strong>${message}</strong><small>${error?.message ?? ''}</small>`;
     });
+    const loading = document.querySelector('#loading');
+    const launch = document.querySelector('#auto-motion');
+    new MutationObserver(() => { if (loading.hidden) launch.disabled = false; }).observe(loading, { attributes: true, attributeFilter: ['hidden'] });
     document.querySelector('#auto-motion').addEventListener('click', () => document.querySelector('#motion').click());
     document.querySelector('#menu-toggle').addEventListener('click', () => {
       document.querySelector('.controls').classList.toggle('visible');
